@@ -138,6 +138,11 @@ class TrieNode {
 		TrieNode child1 = new TrieNode(value.substring(similarLength), this.isWord, this.children);
 		int child2ValueLength = word.length() - (similarLength + index);
 
+		/*
+		 * This causes Thread unsafety, a ReadWriteLock could probably mitigate the
+		 * problem by having this.value modifcation count as a write and just using
+		 * this.value counts as a read.
+		 */
 		this.value = value.substring(0, similarLength);
 		this.isWord = false;
 		this.children = new ConcurrentHashMap<>();
