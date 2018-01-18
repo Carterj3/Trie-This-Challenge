@@ -3,6 +3,10 @@ package com.lesuorac.captivation.software.trie;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * A wrapper around a lock that implements {@link AutoCloseable}
+ *
+ */
 public class TrieLock implements AutoCloseable {
 
 	Lock lock;

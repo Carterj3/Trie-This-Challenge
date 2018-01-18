@@ -10,8 +10,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotNull;
-
-import org.junit.runner.notification.RunListener.ThreadSafe;
+ 
 
 /**
  * Underlying structure used to support the tree structure of a {@link Trie}.
@@ -25,6 +24,9 @@ class TrieNode {
 	 */
 	String value;
 
+	/**
+	 * A lock to control access to {@link #value} to keep things thread-safe.
+	 */
 	TrieLock valueLock;
 
 	/**
