@@ -1,9 +1,7 @@
 package com.lesuorac.captivation.software.trie;
 
-import java.util.ArrayDeque;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Optional;
+import java.util.ArrayDeque; 
+import java.util.Collection; 
 
 import javax.validation.constraints.NotNull;
 
@@ -16,22 +14,20 @@ import javax.validation.constraints.NotNull;
  * </br>
  * {@link #search(String)} obtains a list of all words inside the Trie that start with the provided prefix</br>
  * </br>
- * Note: This structure is not thread-safe.
  *
  */
-public class Trie {
+public class ConcurrentTrie {
 	
 	/**
-	 * The root of the trie.</br>
-	 * Will be {@link Optional#empty()} until a word is added.
+	 * The root of the trie.
 	 */
-	Optional<TrieNode> head;
+	TrieNode head;
 
 	/**
 	 * Creates a {@link Trie}
 	 */
-	public Trie() {
-		this.head = Optional.empty();
+	public ConcurrentTrie() {
+		this.head = new TrieNode("", false);
 	}
 
 	/**
@@ -41,10 +37,7 @@ public class Trie {
 	 * @return true if the word was not already inside the {@link Trie}, otherwise false
 	 */
 	public boolean add(@NotNull String word) {
-		return head.map(node -> node.add(word, 0)).orElseGet(() -> {
-			head = Optional.of(new TrieNode(word, true));
-			return true;
-		});
+		return head.add(word, 0);
 	}
 
 	/**
@@ -54,9 +47,7 @@ public class Trie {
 	 * @return true if the word was inside the {@link Trie}, otherwise false
 	 */
 	public boolean contains(@NotNull String word) {
-		return head.map(node -> {
-			return node.contains(word, 0);
-		}).orElse(false);
+		return head.contains(word, 0);
 	}
 
 	/**
@@ -66,7 +57,7 @@ public class Trie {
 	 * @return a Collection of all the words (i.e. ['prefix', 'prefect'])
 	 */
 	public Collection<String> search(@NotNull String prefix) {
-		return head.map(node -> node.search(prefix, 0, new ArrayDeque<>())).orElse(Arrays.asList());
+		return head.search(prefix, 0, new ArrayDeque<>());
 	}
 
 }

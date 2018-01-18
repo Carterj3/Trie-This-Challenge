@@ -4,12 +4,12 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.lesuorac.captivation.software.trie.Trie;
+import com.lesuorac.captivation.software.trie.ConcurrentTrie; 
 
 public class Main {
 
 	public static void main(String[] args) {
-		Trie trie = new Trie();
+		ConcurrentTrie trie = new ConcurrentTrie();
 		
 		try (Scanner sc = new Scanner(System.in)) {
 			Pattern commandPattern = Pattern.compile("(?<command>(?:add)|(?:contains)|(?:search))\\s+(?<word>.+)");
