@@ -69,8 +69,8 @@ public class TrieTest {
 		Assert.assertTrue(set1.stream().allMatch(word -> ConcurrentTrie.add(word)));
 
 		Assert.assertEquals(0, ConcurrentTrie.search("T").size());
-		Assert.assertEquals(0, ConcurrentTrie.search("ConcurrentTrieds").size());
-		Assert.assertEquals(1, ConcurrentTrie.search("ConcurrentTried").size());
+		Assert.assertEquals(0, ConcurrentTrie.search("trieds").size());
+		Assert.assertEquals(1, ConcurrentTrie.search("tried").size());
 		Assert.assertEquals(4, ConcurrentTrie.search("t").size());
 
 		List<String> set2 = Arrays.asList("TRIEL", "TRIED", "TIRE", "TRIE");
@@ -80,8 +80,8 @@ public class TrieTest {
 		Assert.assertTrue(set3.stream().allMatch(word -> ConcurrentTrie.add(word)));
 
 		Assert.assertEquals(4, ConcurrentTrie.search("T").size());
-		Assert.assertEquals(0, ConcurrentTrie.search("ConcurrentTrieds").size());
-		Assert.assertEquals(1, ConcurrentTrie.search("ConcurrentTried").size());
+		Assert.assertEquals(0, ConcurrentTrie.search("TRIEDS").size());
+		Assert.assertEquals(1, ConcurrentTrie.search("TRIED").size());
 		Assert.assertEquals(4, ConcurrentTrie.search("t").size());
 
 		ConcurrentTrie.add("w");
